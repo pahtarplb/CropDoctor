@@ -1,0 +1,77 @@
+appId: com.cropdoctor.app
+name: CropDoctor App Flow Screenshots
+---
+
+# Install and launch the CropDoctor app
+- launchApp:
+    clearState: true
+
+# Wait for app to fully load
+- extendedWaitUntil:
+    visible: ".*"
+    timeout: 15000
+
+# Take screenshot of splash/home screen
+- takeScreenshot: screenshots/01_home_screen
+
+# Wait a moment and scroll to see more content
+- scroll
+
+- takeScreenshot: screenshots/02_after_scroll
+
+# Try to find and tap on common navigation elements
+- tapOn:
+    text: ".*[Ss]can.*"
+    optional: true
+
+- takeScreenshot: screenshots/03_scan_screen
+
+# Navigate back if possible
+- back
+- extendedWaitUntil:
+    visible: ".*"
+    timeout: 5000
+
+# Try to find Disease Detection or similar feature
+- tapOn:
+    text: ".*[Dd]isease.*"
+    optional: true
+
+- takeScreenshot: screenshots/04_disease_screen
+
+- back
+
+# Try to find Farm/Profile section
+- tapOn:
+    text: ".*[Ff]arm.*|.*[Pp]rofile.*"
+    optional: true
+
+- takeScreenshot: screenshots/05_farm_profile
+
+- back
+
+# Try to find Reports or Analytics
+- tapOn:
+    text: ".*[Rr]eport.*|.*[Aa]nalytic.*"
+    optional: true
+
+- takeScreenshot: screenshots/06_reports
+
+- back
+
+# Try to find Settings or Menu
+- tapOn:
+    text: ".*[Ss]etting.*|.*[Mm]enu.*"
+    optional: true
+
+- takeScreenshot: screenshots/07_settings
+
+# Try navigation drawer or hamburger menu
+- tapOn:
+    point: "5%,5%"
+    optional: true
+
+- takeScreenshot: screenshots/08_menu_drawer
+
+# Final screenshot of current state
+- takeScreenshot: screenshots/09_final_state

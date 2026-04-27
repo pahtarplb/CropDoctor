@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Crop Doctor - Investor Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #111827;
+            --dark-gray: #374151;
+            --medium-gray: #6B7280;
+            --light-gray: #9CA3AF;
+            --lighter-gray: #E5E7EB;
+            --subtle-gray: #F9FAFB;
+            --white: #FFFFFF;
+            --accent: #059669;
+            --accent-light: #D1FAE5;
+            --accent-dark: #047857;
+            --red: #EF4444;
+            --red-light: #FEE2E2;
+            --blue: #3B82F6;
+            --purple: #8B5CF6;
+        }
+
+        html, body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            overflow: hidden;
+            height: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Slide Container */
+        .deck {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 140px;
+            background: var(--white);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slide-content {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* Typography */
+        .slide-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slide-label::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 1px;
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--black);
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 44px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--black);
+            margin-bottom: 36px;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--medium-gray);
+            margin-bottom: 0;
+        }
+
+        .big-statement {
+            font-size: 36px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--dark-gray);
+            max-width: 900px;
+        }
+
+        .statement {
+            font-size: 22px;
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--medium-gray);
+            max-width: 750px;
+        }
+
+        /* Lists */
+        .points {
+            list-style: none;
+            margin-top: 40px;
+        }
+
+        .points li {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--dark-gray);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--lighter-gray);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: background 0.2s;
+        }
+
+        .points li:first-child {
+            border-top: 1px solid var(--lighter-gray);
+        }
+
+        .points .icon {
+            font-size: 24px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--subtle-gray);
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        /* Highlight */
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .highlight-red {
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        /* Stats Grid */
+        .stats-row {
+            display: flex;
+            gap: 80px;
+            margin-top: 56px;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-value {
+            font-size: 72px;
+            font-weight: 800;
+            color: var(--black);
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        .stat-value .unit {
+            font-size: 40px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--medium-gray);
+            margin-top: 12px;
+        }
+
+        /* Two Column */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .col {
+            padding: 32px;
+            background: var(--subtle-gray);
+            border-radius: 16px;
+            border: 1px solid var(--lighter-gray);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .col:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .col h3 {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .col p {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--dark-gray);
+            line-height: 1.7;
+        }
+
+        /* Market Sizing */
+        .market-circles {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-top: 56px;
+        }
+
+        .circle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .circle-visual {
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .circle-visual:hover {
+            transform: scale(1.05);
+        }
+
+        .circle-visual.tam {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--accent-light) 0%, #A7F3D0 100%);
+            box-shadow: 0 12px 40px rgba(5, 150, 105, 0.15);
+        }
+
+        .circle-visual.sam {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #6EE7B7 0%, var(--accent-light) 100%);
+            box-shadow: 0 8px 32px rgba(5, 150, 105, 0.2);
+        }
+
+        .circle-visual.som {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            box-shadow: 0 8px 24px rgba(5, 150, 105, 0.3);
+        }
+
+        .circle-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .circle-visual.som .circle-value {
+            color: var(--white);
+            font-size: 18px;
+        }
+
+        .circle-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--dark-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .circle-desc {
+            font-size: 14px;
+            color: var(--medium-gray);
+            max-width: 160px;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        /* Business Model */
+        .revenue-streams {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .stream {
+            padding: 36px;
+            background: var(--white);
+            border: 1px solid var(--lighter-gray);
+            border-radius: 20px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .stream:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+            border-color: var(--accent-light);
+        }
+
+        .stream-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .stream-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+
+        .stream-desc {
+            font-size: 15px;
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        /* Competition Table */
+        .comp-table {
+            width: 100%;
+            margin-top: 48px;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .comp-table th {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--medium-gray);
+            text-align: left;
+            padding: 20px 24px;
+            background: var(--subtle-gray);
+            border-bottom: 2px solid var(--lighter-gray);
+        }
+
+        .comp-table td {
+            font-size: 15px;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--lighter-gray);
+            vertical-align: middle;
+            background: var(--white);
+        }
+
+        .comp-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comp-table .check {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .comp-table .cross {
+            color: var(--light-gray);
+            font-size: 18px;
+        }
+
+        .comp-table .us {
+            background: var(--accent-light);
+        }
+
+        .comp-table .us td {
+            font-weight: 600;
+            color: var(--accent-dark);
+            background: var(--accent-light);
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .timeline-item {
+            flex: 1;
+            padding: 32px;
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid var(--lighter-gray);
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .timeline-phase {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 16px;
+        }
+
+        .timeline-list {
+            list-style: none;
+        }
+
+        .timeline-list li {
+            font-size: 14px;
+            color: var(--medium-gray);
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timeline-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Team */
+        .team-grid {
+            display: flex;
+            gap: 60px;
+            margin-top: 56px;
+        }
+
+        .team-member {
+            flex: 1;
+            text-align: center;
+            padding: 40px;
+            background: var(--subtle-gray);
+            border-radius: 24px;
+            border: 1px solid var(--lighter-gray);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--lighter-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+            overflow: hidden;
+            border: 4px solid var(--white);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .team-role {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .team-bio {
+            font-size: 15px;
+            color: var(--medium-gray);
+            line-height: 1.7;
+        }
+
+        /* Ask */
+        .ask-amount {
+            font-size: 96px;
+            font-weight: 900;
+            color: var(--black);
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+        }
+
+        .ask-purpose {
+            font-size: 22px;
+            color: var(--medium-gray);
+            margin-bottom: 56px;
+            font-weight: 400;
+        }
+
+        .use-of-funds {
+            display: flex;
+            gap: 24px;
+        }
+
+        .fund-item {
+            flex: 1;
+            padding: 32px;
+            background: var(--subtle-gray);
+            border-radius: 16px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fund-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+        }
+
+        .fund-percent {
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .fund-label {
+            font-size: 15px;
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        /* Navigation (hidden but functional) */
+        .nav-area {
+            position: fixed;
+            top: 0;
+            height: 100%;
+            width: 12%;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .nav-area.prev {
+            left: 0;
+        }
+
+        .nav-area.next {
+            right: 0;
+        }
+
+        /* Progress indicator */
+        .progress {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+            background: var(--white);
+            padding: 12px 16px;
+            border-radius: 100px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--lighter-gray);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .progress-dot:hover {
+            background: var(--light-gray);
+        }
+
+        .progress-dot.active {
+            background: var(--accent);
+            width: 32px;
+            border-radius: 4px;
+        }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 40px;
+            right: 60px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--light-gray);
+            z-index: 100;
+            background: var(--white);
+            padding: 10px 16px;
+            border-radius: 100px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .slide-counter #current {
+            color: var(--black);
+        }
+
+        /* Logo */
+        .logo {
+            position: fixed;
+            top: 32px;
+            left: 48px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Cover specific */
+        .cover-content {
+            text-align: center;
+        }
+
+        .cover-logo {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cover-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cover-title {
+            font-size: 72px;
+            font-weight: 900;
+            color: var(--black);
+            margin-bottom: 20px;
+            letter-spacing: -0.03em;
+        }
+
+        .cover-tagline {
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--medium-gray);
+            margin-bottom: 16px;
+        }
+
+        .cover-meta {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cover-meta img {
+            height: 28px;
+            opacity: 0.7;
+        }
+
+        .cover-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Flow diagram */
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 56px;
+        }
+
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            padding: 28px 16px;
+            background: var(--subtle-gray);
+            border-radius: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .flow-step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .flow-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .flow-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .flow-arrow {
+            font-size: 20px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Vision */
+        .vision-number {
+            font-size: 140px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 16px;
+            letter-spacing: -0.04em;
+        }
+
+        /* Subtle grid background */
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(229, 231, 235, 0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(229, 231, 235, 0.4) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 60px 40px;
+            }
+
+            h1, .cover-title {
+                font-size: 48px;
+            }
+
+            h2 {
+                font-size: 32px;
+            }
+
+            .big-statement {
+                font-size: 24px;
+            }
+
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .revenue-streams {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                flex-wrap: wrap;
+                gap: 40px;
+            }
+
+            .stat-value {
+                font-size: 48px;
+            }
+
+            .market-circles {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .team-grid {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .use-of-funds {
+                flex-wrap: wrap;
+            }
+
+            .fund-item {
+                flex: 1 1 calc(50% - 12px);
+            }
+
+            .timeline {
+                flex-direction: column;
+            }
+
+            .flow {
+                flex-wrap: wrap;
+            }
+
+            .flow-arrow {
+                display: none;
+            }
+
+            .flow-step {
+                flex: 1 1 calc(33% - 12px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <div class="logo">
+        <span class="logo-icon">
+            <img src="imagesFroDeck/Smart Crop Doctor Logo.png" alt="Smart Crop Doctor">
+        </span>
+        Smart Crop Doctor
+    </div>
+
+    <!-- Navigation areas (invisible) -->
+    <div class="nav-area prev" onclick="prevSlide()"></div>
+    <div class="nav-area next" onclick="nextSlide()"></div>
+
+    <!-- Progress dots -->
+    <div class="progress" id="progress"></div>
+
+    <!-- Slide counter -->
+    <div class="slide-counter">
+        <span id="current">1</span> / <span id="total">15</span>
+    </div>
+
+    <!-- Deck -->
+    <div class="deck">
+
+        <!-- Slide 1: Cover -->
+        <section class="slide active" data-slide="1">
+            <div class="cover-content">
+                <div class="cover-logo">
+                    <img src="imagesFroDeck/Smart Crop Doctor Logo.png" alt="Smart Crop Doctor Logo">
+                </div>
+                <h1 class="cover-title">Smart Crop Doctor</h1>
+                <p class="cover-tagline">AI that saves crops before damage happens.</p>
+            </div>
+            <div class="cover-meta">
+                <span>
+                    <img src="imagesFroDeck/Mercora International Logo.png" alt="Mercora International">
+                    Mercora International
+                </span>
+                <span>|</span>
+                <span>Hyderabad, India</span>
+                <span>|</span>
+                <span>April 2026</span>
+            </div>
+        </section>
+
+        <!-- Slide 2: Problem -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <p class="slide-label">The Problem</p>
+                <h2>Indian farmers lose <span class="highlight-red">&#8377;90,000 Cr</span> every year to crop diseases.</h2>
+                <p class="statement">They detect problems too late. They spray too much. They have no data. And middlemen take 40% of what's left.</p>
+                <ul class="points">
+                    <li><span class="icon">&#129439;</span> 20-30% crops lost to pests & disease annually</li>
+                    <li><span class="icon">&#129514;</span> 40% chemicals wasted on wrong areas</li>
+                    <li><span class="icon">&#128065;</span> Zero early warning systems available</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 3: Current Alternatives -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <p class="slide-label">Current Solutions</p>
+                <h2>Today's options don't work.</h2>
+                <div class="two-col" style="margin-top: 48px;">
+                    <div class="col">
+                        <h3>Manual Inspection</h3>
+                        <p>Walk fields daily. Miss 80% of problems. Find disease only when visible - already too late.</p>
+                    </div>
+                    <div class="col">
+                        <h3>Agri Advisory Apps</h3>
+                        <p>Generic tips. No field-specific data. Can't detect what's actually happening on your farm.</p>
+                    </div>
+                    <div class="col">
+                        <h3>Government Extension</h3>
+                        <p>1 officer per 1,000 farmers. Visits once a season. Advice arrives after harvest.</p>
+                    </div>
+                    <div class="col">
+                        <h3>Expensive Drones</h3>
+                        <p>&#8377;10L+ to buy. Need trained pilots. No farmer can afford it individually.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Solution -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content">
+                <p class="slide-label">Our Solution</p>
+                <p class="big-statement">We bring <span class="highlight">AI-powered drone doctors</span> to every farm - detecting disease 10 days before it's visible, predicting yields, and connecting farmers directly to buyers.</p>
+                <div class="stats-row">
+                    <div class="stat">
+                        <div class="stat-value">10<span class="unit"> days</span></div>
+                        <div class="stat-label">Early detection advantage</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">92<span class="unit">%</span></div>
+                        <div class="stat-label">AI detection accuracy</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">&#8377;0</div>
+                        <div class="stat-label">Upfront cost to farmer</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Product -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content">
+                <p class="slide-label">How It Works</p>
+                <h2>Scan. Predict. Sell.</h2>
+                <div class="flow">
+                    <div class="flow-step">
+                        <div class="flow-icon">&#128681;</div>
+                        <div class="flow-label">Drone scans field</div>
+                    </div>
+                    <div class="flow-arrow">&#8594;</div>
+                    <div class="flow-step">
+                        <div class="flow-icon">&#129504;</div>
+                        <div class="flow-label">AI detects issues</div>
+                    </div>
+                    <div class="flow-arrow">&#8594;</div>
+                    <div class="flow-step">
+                        <div class="flow-icon">&#128241;</div>
+                        <div class="flow-label">Alert sent to farmer</div>
+                    </div>
+                    <div class="flow-arrow">&#8594;</div>
+                    <div class="flow-step">
+                        <div class="flow-icon">&#128166;</div>
+                        <div class="flow-label">Precision treatment</div>
+                    </div>
+                    <div class="flow-arrow">&#8594;</div>
+                    <div class="flow-step">
+                        <div class="flow-icon">&#127978;</div>
+                        <div class="flow-label">Sell on marketplace</div>
+                    </div>
+                </div>
+                <ul class="points" style="margin-top: 48px;">
+                    <li><span class="icon">&#128200;</span> <strong>Yield Prediction:</strong> Know expected harvest before season ends</li>
+                    <li><span class="icon">&#127978;</span> <strong>Crop Marketplace:</strong> Sell directly to buyers, skip middlemen</li>
+                    <li><span class="icon">&#127760;</span> <strong>Regional Language:</strong> Works in Telugu, Hindi, Kannada</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 6: Why Now -->
+        <section class="slide" data-slide="6">
+            <div class="slide-content">
+                <p class="slide-label">Why Now</p>
+                <h2>The perfect storm for agri-drones.</h2>
+                <ul class="points">
+                    <li><span class="icon">&#127963;</span> <strong>Government push:</strong> 50% drone subsidies under new policy</li>
+                    <li><span class="icon">&#128241;</span> <strong>Rural internet:</strong> 500M smartphones in rural India</li>
+                    <li><span class="icon">&#129302;</span> <strong>AI maturity:</strong> Vision models now work on low-res imagery</li>
+                    <li><span class="icon">&#127806;</span> <strong>FPO growth:</strong> 10,000+ farmer collectives seeking tech</li>
+                    <li><span class="icon">&#127757;</span> <strong>Climate urgency:</strong> Erratic weather demands precision</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 7: Market Size -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content">
+                <p class="slide-label">Market Opportunity</p>
+                <h2>A &#8377;50,000 Cr opportunity.</h2>
+                <div class="market-circles">
+                    <div class="circle">
+                        <div class="circle-visual tam">
+                            <span class="circle-value">$12B</span>
+                        </div>
+                        <div class="circle-label">TAM</div>
+                        <div class="circle-desc">Global precision agriculture market</div>
+                    </div>
+                    <div class="circle">
+                        <div class="circle-visual sam">
+                            <span class="circle-value">$1.5B</span>
+                        </div>
+                        <div class="circle-label">SAM</div>
+                        <div class="circle-desc">India precision ag + drones</div>
+                    </div>
+                    <div class="circle">
+                        <div class="circle-visual som">
+                            <span class="circle-value">$50M</span>
+                        </div>
+                        <div class="circle-label">SOM</div>
+                        <div class="circle-desc">5-year target</div>
+                    </div>
+                </div>
+                <p class="statement" style="margin-top: 56px;">Only 8% of Indian farms use any precision technology. First-mover window: 2025-2030.</p>
+            </div>
+        </section>
+
+        <!-- Slide 8: Business Model -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content">
+                <p class="slide-label">Business Model</p>
+                <h2>Three ways we make money.</h2>
+                <div class="revenue-streams">
+                    <div class="stream">
+                        <span class="stream-icon">&#128681;</span>
+                        <div class="stream-name">Drone-as-a-Service</div>
+                        <div class="stream-desc">&#8377;300-500 per acre. Farmers pay only when scanned. No ownership burden.</div>
+                    </div>
+                    <div class="stream">
+                        <span class="stream-icon">&#127978;</span>
+                        <div class="stream-name">Marketplace Commission</div>
+                        <div class="stream-desc">3-5% on every crop sale. Verified buyers. Transparent pricing.</div>
+                    </div>
+                    <div class="stream">
+                        <span class="stream-icon">&#128200;</span>
+                        <div class="stream-name">Data Licensing</div>
+                        <div class="stream-desc">Sell crop intelligence to insurers, banks, input companies.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Traction -->
+        <section class="slide" data-slide="9">
+            <div class="slide-content">
+                <p class="slide-label">Traction</p>
+                <h2>Early signals are strong.</h2>
+                <div class="stats-row">
+                    <div class="stat">
+                        <div class="stat-value">100<span class="unit">+</span></div>
+                        <div class="stat-label">Farmers onboarded (pilot)</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Drones deployed</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">500</div>
+                        <div class="stat-label">Acres scanned</div>
+                    </div>
+                </div>
+                <ul class="points" style="margin-top: 48px;">
+                    <li><span class="icon">&#10003;</span> AI model validated: 92% disease detection accuracy</li>
+                    <li><span class="icon">&#10003;</span> Pilot running in 2 Telangana districts</li>
+                    <li><span class="icon">&#10003;</span> LOI signed with 2 FPOs (5,000 farmer members)</li>
+                    <li><span class="icon">&#10003;</span> In talks with State Agriculture Department</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 10: Competition -->
+        <section class="slide" data-slide="10">
+            <div class="slide-content">
+                <p class="slide-label">Competition</p>
+                <h2>We're the only end-to-end solution.</h2>
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Drone Scanning</th>
+                            <th>AI Detection</th>
+                            <th>Yield Prediction</th>
+                            <th>Marketplace</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CropIn</td>
+                            <td class="cross">&#10007;</td>
+                            <td class="check">&#10003;</td>
+                            <td class="check">&#10003;</td>
+                            <td class="cross">&#10007;</td>
+                        </tr>
+                        <tr>
+                            <td>Garuda Aerospace</td>
+                            <td class="check">&#10003;</td>
+                            <td class="cross">&#10007;</td>
+                            <td class="cross">&#10007;</td>
+                            <td class="cross">&#10007;</td>
+                        </tr>
+                        <tr>
+                            <td>DeHaat</td>
+                            <td class="cross">&#10007;</td>
+                            <td class="cross">&#10007;</td>
+                            <td class="cross">&#10007;</td>
+                            <td class="check">&#10003;</td>
+                        </tr>
+                        <tr>
+                            <td>Fasal</td>
+                            <td class="cross">&#10007;</td>
+                            <td class="check">&#10003;</td>
+                            <td class="cross">&#10007;</td>
+                            <td class="cross">&#10007;</td>
+                        </tr>
+                        <tr class="us">
+                            <td>Smart Crop Doctor</td>
+                            <td class="check">&#10003;</td>
+                            <td class="check">&#10003;</td>
+                            <td class="check">&#10003;</td>
+                            <td class="check">&#10003;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Slide 11: Moat -->
+        <section class="slide" data-slide="11">
+            <div class="slide-content">
+                <p class="slide-label">Our Moat</p>
+                <h2>Why this gets harder to copy.</h2>
+                <ul class="points">
+                    <li><span class="icon">&#129504;</span> <strong>Proprietary data:</strong> Every scan trains our AI. More farms = smarter model.</li>
+                    <li><span class="icon">&#129309;</span> <strong>FPO relationships:</strong> Exclusive partnerships lock in farmer groups.</li>
+                    <li><span class="icon">&#127978;</span> <strong>Network effects:</strong> More farmers &#8594; more buyers &#8594; more farmers.</li>
+                    <li><span class="icon">&#127760;</span> <strong>Regional depth:</strong> Telugu-first. Deep Telangana presence.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 12: Go-To-Market -->
+        <section class="slide" data-slide="12">
+            <div class="slide-content">
+                <p class="slide-label">Go-To-Market</p>
+                <h2>Start with FPOs. Then expand.</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Phase 1</div>
+                        <div class="timeline-title">FPO Partnerships</div>
+                        <ul class="timeline-list">
+                            <li>Partner with 20 FPOs</li>
+                            <li>1,000+ farmers each</li>
+                            <li>One sales call, many farmers</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Phase 2</div>
+                        <div class="timeline-title">Government Channels</div>
+                        <ul class="timeline-list">
+                            <li>State agriculture programs</li>
+                            <li>Subsidy-backed deployments</li>
+                            <li>CSR partnerships</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Phase 3</div>
+                        <div class="timeline-title">Direct-to-Farmer</div>
+                        <ul class="timeline-list">
+                            <li>Word of mouth + referrals</li>
+                            <li>WhatsApp-first marketing</li>
+                            <li>Village-level demos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 13: Vision -->
+        <section class="slide" data-slide="13">
+            <div class="slide-content" style="text-align: center;">
+                <p class="slide-label" style="justify-content: center;">The Vision</p>
+                <div class="vision-number">1M+</div>
+                <h2>Farmers. Data-driven. Loss-free.</h2>
+                <p class="statement" style="margin: 24px auto 0;">In 10 years, we want every small farmer in India to have the same intelligence that big agribusinesses have - in their pocket, in their language.</p>
+            </div>
+        </section>
+
+        <!-- Slide 14: Team -->
+        <section class="slide" data-slide="14">
+            <div class="slide-content">
+                <p class="slide-label">The Team</p>
+                <h2>Built by people who know farming.</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="imagesFroDeck/Founder1 Profile pic.png" alt="Jaya Geetha Kiran">
+                        </div>
+                        <div class="team-name">Jaya Geetha Kiran</div>
+                        <div class="team-role">Founder & CEO</div>
+                        <p class="team-bio">Agricultural family. 15+ years in education, HR, tech. Former partner at pharma company. Expert in compliance & finance. Viksit Bharat 2047 delegate.</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="imagesFroDeck/Founder2 profile pic.png" alt="Manasa Raj">
+                        </div>
+                        <div class="team-name">Manasa Raj</div>
+                        <div class="team-role">Co-Founder & COO</div>
+                        <p class="team-bio">Delhi University. Passionate about women's empowerment. Expert in community building, grassroots outreach, and cultural programs.</p>
+                    </div>
+                </div>
+                <p class="statement" style="margin-top: 48px; text-align: center; color: var(--medium-gray);">Advisors from IIT-H, ICRISAT, and Telangana State Agriculture University.</p>
+            </div>
+        </section>
+
+        <!-- Slide 15: Ask -->
+        <section class="slide" data-slide="15">
+            <div class="slide-content" style="text-align: center;">
+                <p class="slide-label" style="justify-content: center;">The Ask</p>
+                <div class="ask-amount">&#8377;5 Crore</div>
+                <p class="ask-purpose">Seed round to capture Telangana and prove unit economics.</p>
+                <div class="use-of-funds">
+                    <div class="fund-item">
+                        <div class="fund-percent">35%</div>
+                        <div class="fund-label">Drone fleet (10 units)</div>
+                    </div>
+                    <div class="fund-item">
+                        <div class="fund-percent">25%</div>
+                        <div class="fund-label">AI & platform</div>
+                    </div>
+                    <div class="fund-item">
+                        <div class="fund-percent">20%</div>
+                        <div class="fund-label">Sales & marketing</div>
+                    </div>
+                    <div class="fund-item">
+                        <div class="fund-percent">20%</div>
+                        <div class="fund-label">Operations & team</div>
+                    </div>
+                </div>
+                <p class="statement" style="margin-top: 56px;">Goal: 10,000 farmers, &#8377;50Cr GMV, path to Series A in 18 months.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+
+        // Initialize
+        document.getElementById('total').textContent = totalSlides;
+        createProgressDots();
+        updateSlide();
+
+        function createProgressDots() {
+            const progress = document.getElementById('progress');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'progress-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToSlide(i);
+                progress.appendChild(dot);
+            }
+        }
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+
+            document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            document.getElementById('current').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                goToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                goToSlide(totalSlides - 1);
+            }
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        });
+
+        // Mouse wheel
+        let wheelTimeout;
+        document.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            clearTimeout(wheelTimeout);
+            wheelTimeout = setTimeout(() => {
+                if (e.deltaY > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }, 50);
+        }, { passive: false });
+    </script>
+</body>
+</html>
