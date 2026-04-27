@@ -554,3 +554,179 @@ export const leafScanImages = [
   "https://images.unsplash.com/photo-1598512752271-33f913a5af13?w=400&h=300&fit=crop",
   "https://images.unsplash.com/photo-1592921870789-04563d55041c?w=400&h=300&fit=crop",
 ]
+
+// Marketplace data
+export const marketplaceListings = [
+  {
+    id: "MKT001",
+    crop: "Premium Basmati Rice",
+    quantity: "50 quintals",
+    pricePerQuintal: 2800,
+    sellerId: "F002",
+    sellerName: "Venkat Reddy",
+    sellerPhone: "9876512340",
+    sellerLocation: "Warangal, Telangana",
+    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop",
+    status: "available",
+    postedDate: getDate(-2),
+  },
+  {
+    id: "MKT002",
+    crop: "Organic Cotton",
+    quantity: "30 quintals",
+    pricePerQuintal: 6500,
+    sellerId: "F003",
+    sellerName: "Lakshmi Devi",
+    sellerPhone: "9988776650",
+    sellerLocation: "Adilabad, Telangana",
+    image: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=400&h=300&fit=crop",
+    status: "available",
+    postedDate: getDate(-1),
+  },
+  {
+    id: "MKT003",
+    crop: "Sona Masoori Rice",
+    quantity: "100 quintals",
+    pricePerQuintal: 2200,
+    sellerId: "F004",
+    sellerName: "Raju Naidu",
+    sellerPhone: "9123456700",
+    sellerLocation: "Nizamabad, Telangana",
+    image: "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=400&h=300&fit=crop",
+    status: "available",
+    postedDate: getDate(-3),
+  },
+  {
+    id: "MKT004",
+    crop: "Red Chillies (Dried)",
+    quantity: "20 quintals",
+    pricePerQuintal: 12000,
+    sellerId: "F005",
+    sellerName: "Prasad Kumar",
+    sellerPhone: "9876543200",
+    sellerLocation: "Guntur, Andhra Pradesh",
+    image: "https://images.unsplash.com/photo-1583119022894-919a68a3d0e3?w=400&h=300&fit=crop",
+    status: "available",
+    postedDate: getDate(-1),
+  },
+  {
+    id: "MKT005",
+    crop: "Turmeric (Fingers)",
+    quantity: "15 quintals",
+    pricePerQuintal: 8500,
+    sellerId: "F001",
+    sellerName: "Ramesh Kumar",
+    sellerPhone: "9876543210",
+    sellerLocation: "Kondapur, Medak",
+    image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=400&h=300&fit=crop",
+    status: "available",
+    postedDate: getDate(-4),
+  },
+]
+
+// Yield Prediction data
+export const yieldPredictions: Record<string, {
+  estimatedYield: number
+  confidence: number
+  harvestDate: string
+  expectedPrice: number
+  factors: Array<{
+    name: string
+    description: string
+    impact: "positive" | "negative" | "neutral"
+    icon: string
+  }>
+  recommendations: string[]
+  historical: {
+    lastSeason: number
+    average3Year: number
+    districtAvg: number
+  }
+}> = {
+  FARM001: {
+    estimatedYield: 28.5,
+    confidence: 85,
+    harvestDate: getDate(45).split("-").reverse().join("/"),
+    expectedPrice: 2200,
+    factors: [
+      {
+        name: "Soil Health",
+        description: "Good organic matter content detected",
+        impact: "positive",
+        icon: "leaf",
+      },
+      {
+        name: "Water Availability",
+        description: "Adequate irrigation from borewell",
+        impact: "positive",
+        icon: "droplets",
+      },
+      {
+        name: "Weather Forecast",
+        description: "Moderate rainfall expected, favorable conditions",
+        impact: "positive",
+        icon: "cloud",
+      },
+      {
+        name: "Sunlight",
+        description: "Optimal sunshine hours for rice growth",
+        impact: "positive",
+        icon: "sun",
+      },
+    ],
+    recommendations: [
+      "Apply potash fertilizer in the next 10 days for better grain filling",
+      "Maintain water level at 5cm during grain development stage",
+      "Monitor for stem borer activity and apply treatment if needed",
+      "Plan harvest when 80% of grains turn golden yellow",
+    ],
+    historical: {
+      lastSeason: 26.2,
+      average3Year: 25.8,
+      districtAvg: 24.0,
+    },
+  },
+  FARM002: {
+    estimatedYield: 12.8,
+    confidence: 72,
+    harvestDate: getDate(60).split("-").reverse().join("/"),
+    expectedPrice: 6200,
+    factors: [
+      {
+        name: "Pest Pressure",
+        description: "Pink bollworm activity affecting yield",
+        impact: "negative",
+        icon: "leaf",
+      },
+      {
+        name: "Water Stress",
+        description: "Rainfed field, dependent on monsoon",
+        impact: "neutral",
+        icon: "droplets",
+      },
+      {
+        name: "Soil Nutrients",
+        description: "Nitrogen deficiency detected",
+        impact: "negative",
+        icon: "leaf",
+      },
+      {
+        name: "Weather Outlook",
+        description: "Rain expected next week, beneficial for crop",
+        impact: "positive",
+        icon: "cloud",
+      },
+    ],
+    recommendations: [
+      "Address pink bollworm infestation immediately with recommended pesticides",
+      "Apply urea fertilizer to correct nitrogen deficiency",
+      "Consider installing drip irrigation for next season",
+      "Harvest picking should be done in multiple rounds as bolls mature",
+    ],
+    historical: {
+      lastSeason: 14.5,
+      average3Year: 13.8,
+      districtAvg: 12.0,
+    },
+  },
+}

@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import { Home, ClipboardList, HelpCircle } from "lucide-react"
+import { Home, ClipboardList, HelpCircle, Store } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface BottomNavProps {
-  active: "home" | "scans" | "help"
+  active: "home" | "scans" | "marketplace" | "help"
 }
 
 export default function BottomNav({ active }: BottomNavProps) {
@@ -12,6 +12,7 @@ export default function BottomNav({ active }: BottomNavProps) {
   const items = [
     { id: "home", label: "Home", icon: Home, path: "/home" },
     { id: "scans", label: "My Scans", icon: ClipboardList, path: "/my-scans" },
+    { id: "marketplace", label: "Market", icon: Store, path: "/marketplace" },
     { id: "help", label: "Help", icon: HelpCircle, path: "/help" },
   ]
 

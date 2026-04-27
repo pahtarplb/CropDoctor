@@ -11,6 +11,8 @@ import {
   Bell,
   Award,
   TrendingUp,
+  Store,
+  BarChart3,
 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -141,6 +143,41 @@ export default function Home() {
               <h3 className="font-semibold text-foreground mb-1">Scan Leaf</h3>
               <p className="text-xs text-muted-foreground">
                 Instant disease detection
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Secondary Actions - New Features */}
+        <div className="grid grid-cols-2 gap-3">
+          {/* Yield Prediction */}
+          <Card
+            className="cursor-pointer hover:shadow-md transition-shadow border-2 border-purple-500/20 bg-gradient-to-br from-purple-50 to-purple-100/50"
+            onClick={() => navigate("/yield-prediction")}
+          >
+            <CardContent className="p-4 flex flex-col items-center text-center">
+              <div className="w-14 h-14 bg-purple-500/10 rounded-full flex items-center justify-center mb-3">
+                <BarChart3 className="w-7 h-7 text-purple-600" />
+              </div>
+              <h3 className="font-semibold text-foreground mb-1">Yield Prediction</h3>
+              <p className="text-xs text-muted-foreground">
+                AI harvest forecast
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Marketplace */}
+          <Card
+            className="cursor-pointer hover:shadow-md transition-shadow border-2 border-orange-500/20 bg-gradient-to-br from-orange-50 to-orange-100/50"
+            onClick={() => navigate("/marketplace")}
+          >
+            <CardContent className="p-4 flex flex-col items-center text-center">
+              <div className="w-14 h-14 bg-orange-500/10 rounded-full flex items-center justify-center mb-3">
+                <Store className="w-7 h-7 text-orange-600" />
+              </div>
+              <h3 className="font-semibold text-foreground mb-1">Marketplace</h3>
+              <p className="text-xs text-muted-foreground">
+                Buy & sell crops
               </p>
             </CardContent>
           </Card>

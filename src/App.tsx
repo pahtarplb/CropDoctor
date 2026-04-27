@@ -15,6 +15,8 @@ import LeafResult from "./pages/LeafResult"
 import Help from "./pages/Help"
 import Notifications from "./pages/Notifications"
 import CarbonCredits from "./pages/CarbonCredits"
+import Marketplace from "./pages/Marketplace"
+import YieldPrediction from "./pages/YieldPrediction"
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
           <Route path="/help" element={<Help />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/carbon-credits" element={<CarbonCredits />} />
+          <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/yield-prediction" element={<YieldPrediction />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
